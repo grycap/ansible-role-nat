@@ -1,0 +1,2 @@
+---
+  - include: "{{nat_mode}}.yaml"

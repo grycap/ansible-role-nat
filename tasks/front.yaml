@@ -1,0 +1,37 @@
+---
+  # echo "1" > /proc/sys/net/ipv4/ip_forward
+  - name: Activate IP forward
+    sysctl:
+      name: net.ipv4.ip_forward
+      value: "1"
+      sysctl_set: yes
+      state: present
+      reload: yes
+
+  # iptables -t nat -A POSTROUTING -o $IFACE_WAN -s $NETWORK_LAN ! -d $NETWORK_LAN -j MASQUERADE
+  - iptables:
+      table: nat
+      chain: POSTROUTING
+      out_interface: "{{ nat_iface_wan }}"
+      source: "{{ nat_network_lan }}"
+      destination: "! {{ nat_network_lan }}"
+      jump: MASQUERADE
+
+  # iptables -A FORWARD -d $NETWORK_LAN -i $IFACE_WAN -o $IFACE_LAN -m state --state RELATED,ESTABLISHED -j ACCEPT
+  - iptables:
+      chain: FORWARD
+      destination: "! {{ nat_network_lan }}"
+      in_interface: "{{ nat_iface_wan }}"
+      out_interface: "{{ nat_iface_lan }}"
+      ctstate: ESTABLISHED,RELATED
+      jump: ACCEPT
+
+  # iptables -A FORWARD -s $NETWORK_LAN -i $IFACE_LAN -j ACCEPT
+  - iptables:
+      chain: FORWARD
+      source: "{{ nat_network_lan }}"
+      in_interface: "{{ nat_iface_lan }}"
+      jump: ACCEPT
+
+
+
