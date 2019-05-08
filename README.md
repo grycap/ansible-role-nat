@@ -11,16 +11,16 @@ Role Variables
 
 The variables that can be passed to this role and a brief description about them are as follows.
 
-  # Type of node to install: front or wn
-  nat_mode: "front"
-  # WAN Network interface in the front node
-  nat_iface_wan: "eth0"
-  # LAN Network interface in the front node
-  nat_iface_lan: "eth1"
-  # LAN newtwork CIDR
-  nat_network_lan: "10.0.0.0/8"
-  # Front-end IP to set as default gateway in the wn
-  nat_gateway_ip: "10.0.0.1"
+    # Type of node to install: front or wn
+    nat_mode: "front"
+    # WAN Network interface in the front node
+    nat_iface_wan: "eth0"
+    # LAN Network interface in the front node
+    nat_iface_lan: "eth1"
+    # LAN newtwork CIDR
+    nat_network_lan: "10.0.0.0/8"
+    # Front-end IP to set as default gateway in the wn
+    nat_gateway_ip: "10.0.0.1"
 
 Example Playbook
 ----------------
