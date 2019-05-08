@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: nat
   author: Miguel Caballer
   description: NAT server/client
   company:  GRyCAP
