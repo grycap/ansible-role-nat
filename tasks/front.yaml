@@ -1,4 +1,9 @@
 ---
+  - name: Install iptables
+    apt:
+      name: iptables
+    when: ansible_os_family == "Debian"
+
   # echo "1" > /proc/sys/net/ipv4/ip_forward
   - name: Activate IP forward
     sysctl:
