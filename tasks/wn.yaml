@@ -1,4 +1,4 @@
 ---
   - name: configure static route
     command: route add default gw {{ nat_gateway_ip }}
-    ignore_error: yes
+    ignore_errors: yes
